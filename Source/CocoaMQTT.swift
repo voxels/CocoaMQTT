@@ -201,7 +201,7 @@ open class CocoaMQTT: NSObject, CocoaMQTTClient {
 
     @discardableResult
     open func connect() -> Bool {
-        socket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.main)
+        socket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.global(qos: .userInitiated))
         reader = CocoaMQTTReader(socket: socket!, delegate: self)
         do {
             try socket!.connect(toHost: self.host, onPort: self.port)
